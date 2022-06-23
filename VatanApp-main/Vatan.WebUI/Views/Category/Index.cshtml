@@ -1,0 +1,33 @@
+﻿@model List<Category>
+
+<h1 class="display-4">Categories</h1>
+<a asp-action="CreateCategory" asp-controller="Category" class="btn btn-sm btn-success">Add Category</a>
+<hr />
+
+<table class="table-sm container">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Category Description</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var category in Model)
+      {
+        <tr>
+            <td scope="row">@category.CategoryId</td>
+            <td scope="row">@category.CategoryName</td>
+            <td scope="row">@category.CategoryDescription</td>
+        <td>
+            <a asp-action="EditCategory" asp-controller="Category" asp-route-id="@category.CategoryId" class="btn btn-sm btn-primary mr-1">Edit</a>
+            <form asp-action="DeleteCategory" asp-controller="Category" method="post" class="d-inline" >
+                <input type="hidden" name="categoryId" value="@category.CategoryId" />
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+        </td>
+        </tr>
+      }  
+  </tbody>
+</table>
